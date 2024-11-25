@@ -26,10 +26,11 @@ export default function Input({
           name={name}
           className={clsx(
             "w-full rounded-full pl-12",
-            "ring ring-transparent transition-shadow placeholder:drop-shadow peer",
-            "focus:ring-green-500 focus:ring-offset-2",
+            "ring ring-transparent transition-shadow",
             "invalid:focus:ring-red-500",
-            errors.length > 0 && "ring-red-500"
+            errors.length > 0
+              ? "border-red-500 focus:border-red-500 focus:ring-red-500 focus:ring-offset-2"
+              : "border-stone-500 focus:border-stone-500 focus:ring-stone-100 focus:ring-offset-2"
           )}
         />
       </label>

@@ -3,6 +3,7 @@ import { useFormState } from "react-dom";
 import Input from "../components/Input";
 import { formSubmit } from "./server";
 import Button from "../components/Button";
+import Alert from "../components/Alert";
 
 export default function Home() {
   const [state, dispatch] = useFormState(formSubmit, null);
@@ -42,6 +43,8 @@ export default function Home() {
 
           <Button text="Login" />
         </form>
+
+        {!state && <Alert />}
       </div>
     </>
   );

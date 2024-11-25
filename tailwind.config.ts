@@ -8,16 +8,7 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        red: {
-          500: "#ef4444", // 예제에서 사용하는 빨간색
-        },
-        blue: {
-          500: "#3b82f6", // 예제에서 사용하는 파란색
-        },
-      },
-    },
+    extend: {},
   },
   plugins: [tailForm],
 };

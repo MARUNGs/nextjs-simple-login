@@ -36,8 +36,6 @@ const formSchema = zod.object({
 
 // main action
 export async function formSubmit(prevState: any, formData: FormData) {
-  console.log(formData);
-
   const data = {
     email: formData.get("email"),
     username: formData.get("username"),
