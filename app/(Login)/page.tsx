@@ -18,6 +18,7 @@ export default function Home() {
             placeholder="이메일을 입력하세요."
             className="grow"
             required
+            errors={state?.fieldErrors.email}
           />
 
           <Input
@@ -26,6 +27,7 @@ export default function Home() {
             placeholder="사용자를 입력하세요."
             className="grow"
             required
+            errors={state?.fieldErrors.username}
           />
 
           <Input
@@ -34,6 +36,7 @@ export default function Home() {
             placeholder="비밀번호를 입력하세요."
             className="grow"
             required
+            errors={state?.fieldErrors.password}
           />
 
           <button className="btn btn-accent">Login</button>

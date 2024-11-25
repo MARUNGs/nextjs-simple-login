@@ -1,6 +1,5 @@
 "use server";
 import zod from "zod";
-import { ILoginForm } from "../types/login";
 import {
   MIN,
   MIN_ERROR,
@@ -44,5 +43,6 @@ export async function formSubmit(prevState: any, formData: FormData) {
   };
 
   const result = formSchema.safeParse(data);
+  console.log(result.error?.flatten());
   return !result.success ? result.error.flatten() : result.data;
 }
