@@ -2,6 +2,7 @@
 import { useFormState } from "react-dom";
 import Input from "../components/Input";
 import { formSubmit } from "./server";
+import Button from "../components/Button";
 
 export default function Home() {
   const [state, dispatch] = useFormState(formSubmit, null);
@@ -39,7 +40,7 @@ export default function Home() {
             errors={state?.fieldErrors.password}
           />
 
-          <button className="btn btn-accent">Login</button>
+          <Button text="Login" />
         </form>
       </div>
     </>

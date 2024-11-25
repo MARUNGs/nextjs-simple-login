@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import daisyui from "daisyui";
+import tailForm from "@tailwindcss/forms";
 
 const config: Config = {
   content: [
@@ -10,11 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        red: {
+          500: "#ef4444", // 예제에서 사용하는 빨간색
+        },
+        blue: {
+          500: "#3b82f6", // 예제에서 사용하는 파란색
+        },
       },
     },
   },
-  plugins: [daisyui],
+  plugins: [tailForm],
 };
 export default config;
