@@ -16,7 +16,9 @@ const formSchema = zod.object({
       invalid_type_error,
       required_error,
     })
-    .email()
+    .email({
+      message: "이메일 형식으로 작성하세요.",
+    })
     .toLowerCase(),
   username: zod
     .string({
@@ -44,5 +46,8 @@ export async function formSubmit(prevState: any, formData: FormData) {
 
   const result = formSchema.safeParse(data);
   console.log(result.error?.flatten());
-  return !result.success ? result.error.flatten() : result.data;
+  if (!result.success) {
+    console.log(result.error.flatten());
+    return result.error.flatten();
+  } else console.log(result.data);
 }
