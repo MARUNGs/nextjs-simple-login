@@ -8,6 +8,7 @@ import {
   invalid_type_error,
   required_error,
 } from "./constants";
+import { IPrevStateProps } from "../types/login";
 
 // validation
 const formSchema = zod.object({
@@ -35,7 +36,13 @@ const formSchema = zod.object({
 });
 
 // main action
-export async function formSubmit(prevState: any, formData: FormData) {
+export async function formSubmit(
+  prevState: {
+    prevState: boolean;
+    errors?: zod.ZodFormattedError<any> | null;
+  },
+  formData: FormData
+) {
   const data = {
     email: formData.get("email"),
     username: formData.get("username"),
@@ -43,9 +50,19 @@ export async function formSubmit(prevState: any, formData: FormData) {
   };
 
   const result = formSchema.safeParse(data);
-  console.log(result.error?.flatten());
+  let prev;
+
   if (!result.success) {
-    console.log(result.error.flatten());
-    return result.error.flatten();
-  } else console.log(result.data);
+    prev = {
+      prevState: false,
+      errors: result.error.flatten(),
+    };
+  } else {
+    prev = {
+      prevState: true,
+      errors: undefined,
+    };
+  }
+
+  return prev;
 }

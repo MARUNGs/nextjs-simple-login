@@ -6,46 +6,50 @@ import Button from "../components/Button";
 import Alert from "../components/Alert";
 
 export default function Home() {
-  const [state, dispatch] = useFormState(formSubmit, null);
+  const flag = {
+    prevState: false,
+    errors: null,
+  };
+  const [state, dispatch] = useFormState(formSubmit, flag);
+  console.log(state.errors?.fieldErrors.email);
 
   return (
-    <>
-      <div className="flex flex-col items-center">
-        <div className="text-5xl m-14">🔥</div>
+    <div className="flex flex-col items-center">
+      <div className="text-5xl m-14">🔥</div>
 
-        <form action={dispatch} className="*:mb-2 *:w-96 *:rounded-full">
-          <Input
-            type="text"
-            name="email"
-            placeholder="이메일을 입력하세요."
-            className="grow"
-            required
-            errors={state?.fieldErrors.email}
-          />
+      <form action={dispatch} className="*:mb-2 *:w-96 *:rounded-full">
+        <Input
+          type="text"
+          name="email"
+          placeholder="이메일을 입력하세요."
+          className="grow"
+          required
+          errors={state.errors?.fieldErrors.email}
+        />
 
-          <Input
-            type="text"
-            name="username"
-            placeholder="사용자를 입력하세요."
-            className="grow"
-            required
-            errors={state?.fieldErrors.username}
-          />
+        <Input
+          type="text"
+          name="username"
+          placeholder="사용자를 입력하세요."
+          className="grow"
+          required
+          errors={state.errors?.fieldErrors.username}
+        />
 
-          <Input
-            type="password"
-            name="password"
-            placeholder="비밀번호를 입력하세요."
-            className="grow"
-            required
-            errors={state?.fieldErrors.password}
-          />
+        <Input
+          type="password"
+          name="password"
+          placeholder="비밀번호를 입력하세요."
+          className="grow"
+          required
+          minLength={5}
+          errors={state.errors?.fieldErrors.password}
+        />
 
-          <Button text="Login" />
-        </form>
+        <Button text="Login" />
+      </form>
 
-        {!state && <Alert />}
-      </div>
-    </>
+      {state.prevState && <Alert />}
+    </div>
   );
 }

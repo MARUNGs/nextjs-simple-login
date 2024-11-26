@@ -8,7 +8,6 @@ export default function Input({
   errors = [],
   ...props
 }: IInputProps & InputHTMLAttributes<HTMLInputElement>) {
-  console.log(errors.length > 0);
   return (
     <>
       <label className="flex items-center relative">
