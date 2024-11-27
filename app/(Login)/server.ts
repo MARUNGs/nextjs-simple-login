@@ -1,42 +1,50 @@
 "use server";
 import zod from "zod";
-import {
-  EMAIL_REGEX,
-  EMAIL_REGEX_ERROR,
-  PASSWORD_MIN,
-  PASSWORD_MIN_ERROR,
-  PASSWORD_REGEX,
-  PASSWORD_REGEX_ERROR,
-  USERNAME_MIN,
-  USERNAME_MIN_ERROR,
-  invalid_type_error,
-  required_error,
-} from "./constants";
+import * as validation from "./constants";
+
+const {
+  invalid: emailInvalid,
+  email,
+  regex: emailRegex,
+  required: emailRequired,
+} = validation.EMAIL_VALIDATION;
+
+const {
+  min: usernameMin,
+  required: usernameRequired,
+  invalid: usernameInvalid,
+} = validation.USERNAME_VALIDATION;
+
+const {
+  min: pwMin,
+  regex: pwRegex,
+  required: pwRequired,
+} = validation.PASSWORD_VALIDATION;
 
 // validation
 const formSchema = zod.object({
   email: zod
     .string({
-      invalid_type_error,
-      required_error,
+      invalid_type_error: emailInvalid.message,
+      required_error: emailRequired.message,
     })
     .email({
-      message: "이메일 형식으로 작성하세요.",
+      message: email.message,
     })
-    .regex(EMAIL_REGEX, EMAIL_REGEX_ERROR)
+    .regex(emailRegex.value, emailRegex.message)
     .toLowerCase(),
   username: zod
     .string({
-      invalid_type_error,
-      required_error,
+      invalid_type_error: usernameInvalid.message,
+      required_error: usernameRequired.message,
     })
-    .min(USERNAME_MIN, USERNAME_MIN_ERROR),
+    .min(usernameMin.value, usernameMin.message),
   password: zod
     .string({
-      required_error: "비밀번호를 입력하세요.",
+      required_error: pwRequired.message,
     })
-    .min(PASSWORD_MIN, PASSWORD_MIN_ERROR)
-    .regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
+    .min(pwMin.value, pwMin.message)
+    .regex(pwRegex.value, pwRegex.message),
 });
 
 // main action
