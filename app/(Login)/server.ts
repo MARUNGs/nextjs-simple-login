@@ -1,14 +1,17 @@
 "use server";
 import zod from "zod";
 import {
-  MIN,
-  MIN_ERROR,
+  EMAIL_REGEX,
+  EMAIL_REGEX_ERROR,
+  PASSWORD_MIN,
+  PASSWORD_MIN_ERROR,
   PASSWORD_REGEX,
   PASSWORD_REGEX_ERROR,
+  USERNAME_MIN,
+  USERNAME_MIN_ERROR,
   invalid_type_error,
   required_error,
 } from "./constants";
-import { IPrevStateProps } from "../types/login";
 
 // validation
 const formSchema = zod.object({
@@ -20,18 +23,19 @@ const formSchema = zod.object({
     .email({
       message: "이메일 형식으로 작성하세요.",
     })
+    .regex(EMAIL_REGEX, EMAIL_REGEX_ERROR)
     .toLowerCase(),
   username: zod
     .string({
       invalid_type_error,
       required_error,
     })
-    .min(MIN, MIN_ERROR),
+    .min(USERNAME_MIN, USERNAME_MIN_ERROR),
   password: zod
     .string({
       required_error: "비밀번호를 입력하세요.",
     })
-    .min(MIN, MIN_ERROR)
+    .min(PASSWORD_MIN, PASSWORD_MIN_ERROR)
     .regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
 });
 

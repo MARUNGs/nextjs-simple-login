@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { formSubmit } from "./server";
 import Button from "../components/Button";
 import Alert from "../components/Alert";
+import { MIN, PASSWORD_MIN, USERNAME_MIN } from "./constants";
 
 export default function Home() {
   const flag = {
@@ -33,6 +34,7 @@ export default function Home() {
           placeholder="사용자를 입력하세요."
           className="grow"
           required
+          minLength={USERNAME_MIN}
           errors={state.errors?.fieldErrors.username}
         />
 
@@ -42,7 +44,7 @@ export default function Home() {
           placeholder="비밀번호를 입력하세요."
           className="grow"
           required
-          minLength={5}
+          minLength={PASSWORD_MIN}
           errors={state.errors?.fieldErrors.password}
         />
 
