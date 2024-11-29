@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 export default function Navigation() {
   const router = useRouter();
   const [flag, setFlag] = useState(false);
-  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     setFlag(true);
   }, []);
 
+  /** 뒤로가기 */
   const backPage = () => {
-    flag && router.back();
+    if (flag) router.back();
   };
 
   return (
