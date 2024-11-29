@@ -40,7 +40,7 @@ export default function CreateAccount() {
           placeholder="이메일을 입력하세요."
           className="grow"
           required
-          // errors={state.errors?.fieldErrors.email}
+          errors={state.errors?.email}
         />
 
         <Input
@@ -50,7 +50,7 @@ export default function CreateAccount() {
           className="grow"
           required
           minLength={validation.USERNAME_VALIDATION.min.value}
-          // errors={state.errors?.fieldErrors.username}
+          errors={state.errors?.username}
         />
 
         <Input
@@ -60,7 +60,7 @@ export default function CreateAccount() {
           className="grow"
           required
           minLength={validation.PASSWORD_VALIDATION.min.value}
-          // errors={state.errors?.fieldErrors.password}
+          errors={state.errors?.password}
         />
 
         <Input
@@ -70,7 +70,7 @@ export default function CreateAccount() {
           className="grow"
           required
           minLength={validation.PASSWORD_VALIDATION.min.value}
-          // errors={state.errors?.fieldErrors.password}
+          errors={state.errors?.password}
         />
 
         <Button text="Join" />
