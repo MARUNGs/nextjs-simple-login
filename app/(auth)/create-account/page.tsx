@@ -1,6 +1,5 @@
 /** 회원가입 */
 "use client";
-// import Alert from "@/app/components/Alert";
 import Button from "@/app/components/Button";
 import Input from "@/app/components/Input";
 import clsx from "clsx";

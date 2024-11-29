@@ -5,7 +5,6 @@ import { IPrevStateProps } from "@/app/types/login";
 import { findEmail } from "@/app/lib/db";
 import bcrypt from "bcrypt";
 import { loginUser } from "@/app/lib/login";
-import { redirect } from "next/navigation";
 
 const {
   invalid: emailInvalid,

@@ -56,11 +56,6 @@ export default function Card({ username }: { username: string }) {
         </div>
       </div>
       <div className="flex flex-col items-center pb-10">
-        {/* <img
-          className="w-24 h-24 mb-3 rounded-full shadow-lg"
-          src="/docs/images/people/profile-picture-3.jpg"
-          alt="Bonnie image"
-        /> */}
         <svg
           data-slot="icon"
           fill="none"

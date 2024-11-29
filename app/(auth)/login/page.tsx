@@ -4,7 +4,6 @@ import { useFormState } from "react-dom";
 import Input from "../../components/Input";
 import { formSubmit } from "./server";
 import Button from "../../components/Button";
-import Alert from "../../components/Alert";
 import * as validation from "../../lib/constants";
 import Link from "next/link";
 import clsx from "clsx";
