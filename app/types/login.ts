@@ -1,12 +1,21 @@
 import zod from "zod";
 
-interface ILoginForm {
+export interface ILoginForm {
   email: string;
   username: string;
   password: string;
 }
 
 export interface IPrevStateProps {
-  success: boolean;
+  prevState: boolean;
   errors?: zod.ZodFormattedError<ILoginForm> | null;
+}
+
+export interface IFormState {
+  success: boolean;
+  errors?: {
+    email?: string[];
+    username?: string[];
+    password?: string[];
+  };
 }
