@@ -78,3 +78,57 @@ export function Chat({ width, height }: { width?: string; height?: string }) {
     </Link>
   );
 }
+
+export function BackIcon({
+  width,
+  height,
+}: {
+  width?: string;
+  height?: string;
+}) {
+  return (
+    <svg
+      data-slot="icon"
+      fill="none"
+      strokeWidth="1.5"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      className="stroke-black dark:stroke-white"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+      ></path>
+    </svg>
+  );
+}
+
+export function LogoutIcon({
+  width,
+  height,
+}: {
+  width?: string;
+  height?: string;
+}) {
+  return (
+    <svg
+      data-slot="icon"
+      fill="none"
+      stroke-width="1.5"
+      // stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="stroke-black dark:stroke-white"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+      ></path>
+    </svg>
+  );
+}

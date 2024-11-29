@@ -1,25 +1,37 @@
-import Button from "./Button";
-import { Chat } from "./Icon";
-import getSession from "../lib/session";
-import { redirect } from "next/navigation";
+"use client";
+import { useRouter } from "next/navigation";
+import { BackIcon, Chat } from "./Icon";
+import { logout } from "./NavigationServer";
+import { useEffect, useState } from "react";
 
 export default function Navigation() {
-  const logout = async () => {
-    "use server";
-    const session = await getSession();
-    session.destroy();
-    redirect("/");
+  const router = useRouter();
+  const [flag, setFlag] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  useEffect(() => {
+    setFlag(true);
+  }, []);
+
+  const backPage = () => {
+    flag && router.back();
   };
 
   return (
     <>
-      <div className="flex justify-center items-center">
-        <Chat width="60" height="60" />
-      </div>
+      <div className="flex items-center justify-center gap-48 mt-5 mb-5">
+        <div onClick={backPage} className="cursor-auto">
+          <BackIcon width="40" height="40" />
+        </div>
 
-      <form action={logout}>
-        <Button text="Logout" />
-      </form>
+        <Chat width="40" height="40" />
+
+        <form action={logout}>
+          <button type="submit" className="dark:text-white hover:underline">
+            로그아웃
+          </button>
+        </form>
+      </div>
     </>
   );
 }
