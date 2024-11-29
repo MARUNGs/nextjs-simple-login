@@ -86,4 +86,18 @@ export async function findPassword(email: string) {
   return result;
 }
 
+export async function findUser(id: number) {
+  const user = await db.user.findUnique({
+    where: { user_no: id },
+    select: { user_no: true, username: true, email: true },
+  });
+
+  const result = {
+    success: Boolean(user),
+    data: user,
+  };
+
+  return result;
+}
+
 export default db;

@@ -20,7 +20,7 @@ export default function Navigation() {
   return (
     <>
       <div className="flex items-center justify-center gap-48 mt-5 mb-5">
-        <div onClick={backPage} className="cursor-auto">
+        <div onClick={backPage} className="cursor-pointer">
           <BackIcon width="40" height="40" />
         </div>
 
