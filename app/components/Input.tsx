@@ -14,7 +14,7 @@ export default function Input({
         <span className="absolute ml-5">
           {name === "email" ? (
             <EmailIcon />
-          ) : name === "user" ? (
+          ) : name === "username" ? (
             <UserIcon />
           ) : (
             <PasswordIcon />
