@@ -33,7 +33,7 @@ export default function Home() {
           placeholder="이메일을 입력하세요."
           className="grow"
           required
-          errors={state.errors.email}
+          errors={state?.errors.email}
         />
 
         <Input
@@ -43,13 +43,13 @@ export default function Home() {
           className="grow"
           required
           minLength={validation.PASSWORD_VALIDATION.min.value}
-          errors={state.errors.password}
+          errors={state?.errors.password}
         />
 
         <Button text="Login" />
       </form>
 
-      {state.prevState && <Alert />}
+      {/* {state.prevState && <Alert />} */}
 
       <p className={`${clsx("mt-5 text-lg", "dark:text-white")}`}>
         아직 회원이 아니신가요?{" "}

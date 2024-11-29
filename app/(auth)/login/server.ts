@@ -5,6 +5,7 @@ import { IPrevStateProps } from "@/app/types/login";
 import { findEmail } from "@/app/lib/db";
 import bcrypt from "bcrypt";
 import { loginUser } from "@/app/lib/login";
+import { redirect } from "next/navigation";
 
 const {
   invalid: emailInvalid,
@@ -76,11 +77,11 @@ export async function formSubmit(_: IPrevStateProps, formData: FormData) {
   } else {
     // 사용자가 입력한 이메일의 패스워드가 동일한지 체크 - email이 있다는 전제
     const user = await findEmail(result.data.email);
-    const ok = await bcrypt.compare(user.data.password, result.data.password);
+    const ok = await bcrypt.compare(result.data.password, user.data.password);
 
     // 비밀번호가 같으면 사용자 로그인 처리
     if (ok) {
-      loginUser(user.data);
+      await loginUser(user.data);
     } else {
       const result = {
         prevState: false,
