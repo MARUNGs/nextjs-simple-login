@@ -13,7 +13,10 @@ import { Chat } from "@/app/components/Icon";
 export default function Home() {
   const flag = {
     prevState: false,
-    errors: null,
+    errors: {
+      email: [],
+      password: [],
+    },
   };
   const [state, dispatch] = useFormState(formSubmit, flag);
 
@@ -30,17 +33,7 @@ export default function Home() {
           placeholder="이메일을 입력하세요."
           className="grow"
           required
-          errors={state.errors?.fieldErrors.email}
-        />
-
-        <Input
-          type="text"
-          name="username"
-          placeholder="사용자를 입력하세요."
-          className="grow"
-          required
-          minLength={validation.USERNAME_VALIDATION.min.value}
-          errors={state.errors?.fieldErrors.username}
+          errors={state.errors.email}
         />
 
         <Input
@@ -50,7 +43,7 @@ export default function Home() {
           className="grow"
           required
           minLength={validation.PASSWORD_VALIDATION.min.value}
-          errors={state.errors?.fieldErrors.password}
+          errors={state.errors.password}
         />
 
         <Button text="Login" />

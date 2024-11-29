@@ -10,13 +10,13 @@ const db = new PrismaClient(); // client 생성
 export async function findEmail(email: string) {
   const user = await db.user.findUnique({
     where: { email },
-    select: { user_no: true },
+    select: { user_no: true, email: true, password: true },
   });
 
   const result = {
     // 결과 생성
-    success: Boolean(user),
-    data: user,
+    success: Boolean(user) ? true : false,
+    data: Boolean(user) ? user : undefined,
   };
 
   return result;
@@ -62,6 +62,25 @@ export async function createUser({ email, username, password }: ILoginForm) {
   const result = {
     success: Boolean(user),
     data: user,
+  };
+
+  return result;
+}
+
+/**
+ * [로그인] 비밀번호 조회
+ * @param email
+ * @returns
+ */
+export async function findPassword(email: string) {
+  const user = await db.user.findUnique({
+    where: { email },
+    select: { password: true },
+  });
+
+  const result = {
+    success: true,
+    data: user.password,
   };
 
   return result;
