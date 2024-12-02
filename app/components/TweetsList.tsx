@@ -27,7 +27,16 @@ export default function TweetsList({ success, data }: IProps) {
   return (
     <>
       {success && (
-        <div className={`${clsx("sm:w-96", "dark:text-white", "w-screen")}`}>
+        <div
+          className={`${clsx(
+            "sm:w-[620px]",
+            "md:w-[768px]",
+            "lg:w-[1024px]",
+            "xl:w-[1024px]",
+            "dark:text-white",
+            "w-screen"
+          )}`}
+        >
           {data.map((tweet) => (
             <Tweets key={tweet.tweet_no} {...tweet} />
           ))}
