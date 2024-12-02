@@ -1,5 +1,4 @@
 // 트윗 상세 페이지
-import { Chat } from "@/app/components/Icon";
 import { findTweet } from "@/app/lib/db";
 import { formatToTimeAgo } from "@/app/lib/format";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
@@ -8,12 +7,6 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-interface IParams {
-  params: {
-    id: string;
-  };
-}
-
 // 동적 타이틀
 export async function generateMetadata({ params }): Promise<Metadata> {
   return {
@@ -21,26 +14,12 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   };
 }
 
-interface ITweetType {
-  tweet: string;
-  tweet_no: number;
-  created_at: Date;
-  updated_at: Date;
-  userNo: number;
-  user: {
-    email: string;
-    username: string;
-    bio: string;
-  };
-  Like: {
-    user: {
-      user_no: number;
-      username: string;
-    };
-  }[];
+async function wait() {
+  return new Promise((resolve) => setTimeout(resolve, 10000));
 }
 
-export default async function Tweet({ params }: IParams) {
+export default async function Tweet({ params }: { params: { id: string } }) {
+  // await wait();
   const id = Number(params.id);
   const result = await findTweet(id);
 

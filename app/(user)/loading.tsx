@@ -3,8 +3,9 @@ import clsx from "clsx";
 export default function TweetsLoading() {
   return (
     <>
-      {[1, 2, 3].map((_, index) => (
+      {[1, 2, 3].map((_, i) => (
         <div
+          key={i}
           className={`${clsx(
             "grid grid-cols-[1fr,100px] gap-4",
             "border border-stone-500 rounded-md",
