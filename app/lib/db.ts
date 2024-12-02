@@ -133,6 +133,9 @@ export async function getTweetsInit() {
       },
     },
     take: 3,
+    orderBy: {
+      created_at: "desc",
+    },
   });
 
   const result = {
@@ -173,6 +176,9 @@ export async function getTweets(page: number) {
     },
     skip: page * 3,
     take: 3,
+    orderBy: {
+      created_at: "desc",
+    },
   });
 
   return tweets;

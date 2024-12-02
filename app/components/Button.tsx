@@ -1,15 +1,13 @@
 "use client";
 import clsx from "clsx";
-import { RefObject } from "react";
+import { forwardRef } from "react";
 import { useFormStatus } from "react-dom";
 
-export default function Button({
-  ref,
-  text,
-}: {
-  ref: RefObject<HTMLButtonElement>;
+interface ButtonProps {
   text: string;
-}) {
+}
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ text }, ref) => {
   const { pending } = useFormStatus();
 
   return (
@@ -25,4 +23,6 @@ export default function Button({
       {pending ? "loading ..." : text}
     </button>
   );
-}
+});
+
+export default Button;

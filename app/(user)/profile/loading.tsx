@@ -5,6 +5,8 @@ async function wait() {
 }
 
 export default async function ProfileLoading() {
+  // await wait();
+
   return (
     <div className="size-40 bg-stone-500">
       <div className="size-full bg-stone-500"></div>

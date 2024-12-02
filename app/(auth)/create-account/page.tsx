@@ -24,8 +24,6 @@ export default function CreateAccount() {
     initState
   );
 
-  console.log(state);
-
   return (
     <div className="flex flex-col items-center">
       <div className="text-5xl m-14">
