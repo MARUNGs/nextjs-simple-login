@@ -117,6 +117,8 @@ export async function getTweets() {
       user: {
         select: {
           username: true,
+          email: true,
+          bio: true,
         },
       },
       Like: {

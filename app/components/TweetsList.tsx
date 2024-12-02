@@ -1,12 +1,15 @@
 // 트윗 리스트 컴포넌트
 import clsx from "clsx";
+import Tweets from "./Tweets";
 
-interface ITweetType {
+export interface ITweetType {
   tweet: string;
   tweet_no: number;
   created_at: Date;
   user: {
     username: string;
+    email: string;
+    bio: string;
   };
   Like: {
     user: {
@@ -15,14 +18,21 @@ interface ITweetType {
   }[];
 }
 
-export default function Tweets({ tweets }: { tweets: ITweetType[] }) {
+interface IProps {
+  success: boolean;
+  data: ITweetType[];
+}
+
+export default function TweetsList({ success, data }: IProps) {
   return (
-    <div className={`${clsx("dark:text-white")}`}>
-      {tweets.map((tweet) => (
-        <div key={tweet.tweet_no}>
-          {tweet.user.username} {tweet.tweet}
+    <>
+      {success && (
+        <div className={`${clsx("sm:w-96", "dark:text-white", "w-screen")}`}>
+          {data.map((tweet) => (
+            <Tweets key={tweet.tweet_no} {...tweet} />
+          ))}
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 }

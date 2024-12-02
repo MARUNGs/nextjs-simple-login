@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Navigation() {
   return (
-    <div className="flex items-center justify-center gap-48 my-5 pb-5">
+    <div className="flex items-center justify-center gap-4 sm:gap-16 md:gap-48 my-5 pb-5">
       <Link href="/">
         <BackIcon width="40" height="40" />
       </Link>
