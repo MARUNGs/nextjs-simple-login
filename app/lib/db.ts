@@ -86,6 +86,11 @@ export async function findPassword(email: string) {
   return result;
 }
 
+/**
+ * 사용자 조회
+ * @param id
+ * @returns
+ */
 export async function findUser(id: number) {
   const user = await db.user.findUnique({
     where: { user_no: id },
@@ -95,6 +100,40 @@ export async function findUser(id: number) {
   const result = {
     success: Boolean(user),
     data: user,
+  };
+
+  return result;
+}
+
+/**
+ * 트윗 리스트 조회
+ */
+export async function getTweets() {
+  const tweets = await db.tweet.findMany({
+    select: {
+      tweet_no: true,
+      tweet: true,
+      created_at: true,
+      user: {
+        select: {
+          username: true,
+        },
+      },
+      Like: {
+        select: {
+          user: {
+            select: {
+              username: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  const result = {
+    success: Boolean(tweets),
+    data: tweets,
   };
 
   return result;

@@ -20,9 +20,16 @@ export default function Home() {
   const [state, dispatch] = useFormState(formSubmit, flag);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="text-5xl m-14">
+    <div
+      className={`${clsx(
+        "m-14",
+        "flex flex-col items-center justify-between",
+        "[&_div_h1]:dark:text-white [&_div_h1]:text-2xl *:pb-2"
+      )}`}
+    >
+      <div className="text-5xl m-12 flex flex-col items-center">
         <Chat />
+        <h1>어서오세요! Home Tweet Home입니다.</h1>
       </div>
 
       <form action={dispatch} className="*:mb-2 *:w-96 *:rounded-full">
