@@ -1,12 +1,20 @@
 "use client";
 import clsx from "clsx";
+import { RefObject } from "react";
 import { useFormStatus } from "react-dom";
 
-export default function Button({ text }: { text: string }) {
+export default function Button({
+  ref,
+  text,
+}: {
+  ref: RefObject<HTMLButtonElement>;
+  text: string;
+}) {
   const { pending } = useFormStatus();
 
   return (
     <button
+      ref={ref}
       disabled={pending}
       className={clsx(
         "bg-stone-300 pt-2 pb-2 font-semibold text-black",

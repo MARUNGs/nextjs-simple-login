@@ -107,9 +107,9 @@ export async function findUser(id: number) {
 }
 
 /**
- * 트윗 리스트 조회
+ * 트윗 리스트 조회 (초기 조회)
  */
-export async function getTweets() {
+export async function getTweetsInit() {
   const tweets = await db.tweet.findMany({
     select: {
       tweet_no: true,
@@ -132,6 +132,7 @@ export async function getTweets() {
         },
       },
     },
+    take: 3,
   });
 
   const result = {
@@ -140,6 +141,41 @@ export async function getTweets() {
   };
 
   return result;
+}
+
+/**
+ * 트윗 리스트 조회 (페이지네이션)
+ * @param page
+ * @returns
+ */
+export async function getTweets(page: number) {
+  const tweets = await db.tweet.findMany({
+    select: {
+      tweet_no: true,
+      tweet: true,
+      created_at: true,
+      user: {
+        select: {
+          username: true,
+          email: true,
+          bio: true,
+        },
+      },
+      Like: {
+        select: {
+          user: {
+            select: {
+              username: true,
+            },
+          },
+        },
+      },
+    },
+    skip: page * 3,
+    take: 3,
+  });
+
+  return tweets;
 }
 
 /**
@@ -173,7 +209,5 @@ export async function findTweet(id: number): Promise<ITweetType> {
 
   return tweet;
 }
-
-// export async function
 
 export default db;

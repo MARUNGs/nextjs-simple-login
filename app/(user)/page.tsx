@@ -1,10 +1,10 @@
 // 메인화면
 import clsx from "clsx";
-import { getTweets } from "../lib/db";
+import { getTweetsInit } from "../lib/db";
 import TweetsList from "../components/TweetsList";
 import { Prisma } from "@prisma/client";
 
-export type PrismaType = Prisma.PromiseReturnType<typeof getTweets>;
+export type PrismaType = Prisma.PromiseReturnType<typeof getTweetsInit>;
 
 async function TweetsLoading() {
   return new Promise((resolve) => setTimeout(resolve, 10000));
@@ -12,7 +12,7 @@ async function TweetsLoading() {
 
 export default async function Home() {
   // await TweetsLoading();
-  const tweets = await getTweets(); // 트윗 리스트 가져오기
+  const tweets = await getTweetsInit(); // 트윗 리스트 가져오기
 
   return (
     <>
