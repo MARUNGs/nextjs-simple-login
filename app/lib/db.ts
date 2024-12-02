@@ -174,4 +174,6 @@ export async function findTweet(id: number): Promise<ITweetType> {
   return tweet;
 }
 
+// export async function
+
 export default db;
