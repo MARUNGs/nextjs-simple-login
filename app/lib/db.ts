@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { ILoginForm } from "../types/login";
+import { ITweetType } from "../components/TweetsList";
 
 const db = new PrismaClient(); // client 생성
 
@@ -139,6 +140,38 @@ export async function getTweets() {
   };
 
   return result;
+}
+
+/**
+ * 트윗 조회
+ * @param id
+ * @returns
+ */
+export async function findTweet(id: number): Promise<ITweetType> {
+  const tweet = await db.tweet.findUnique({
+    where: { tweet_no: id },
+    include: {
+      user: {
+        select: {
+          username: true,
+          email: true,
+          bio: true,
+        },
+      },
+      Like: {
+        select: {
+          user: {
+            select: {
+              username: true,
+              user_no: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return tweet;
 }
 
 export default db;

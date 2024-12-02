@@ -1,8 +1,9 @@
-import Navigation from "../components/Navigation";
+import Navigation from "@/app/components/Navigation";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Tweet Detail :: %s",
+  description: "Tweet Detail",
 };
 
 export default function UserLayout({
