@@ -1,15 +1,13 @@
 export const dynamic = "force-dynamic";
 
-async function wait() {
-  return new Promise((resolve) => setTimeout(resolve, 100000));
-}
-
 export default async function ProfileLoading() {
-  // await wait();
-
   return (
-    <div className="size-40 bg-stone-500">
-      <div className="size-full bg-stone-500"></div>
+    <div className="flex flex-col items-center">
+      <div>
+        <div className="w-32 h-10 bg-stone-500 rounded-lg my-5" />
+        <div className="w-40 h-10 bg-stone-500 rounded-lg" />
+      </div>
+      <div className="flex flex-col items-center my-10 w-3/5 h-60 border rounded-md"></div>
     </div>
   );
 }
