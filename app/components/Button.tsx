@@ -25,4 +25,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ text }, ref) => {
   );
 });
 
+// 버튼 컴포넌트 이름 설정 :: forwardRef 사용 시 필요
+Button.displayName = "Button";
+
 export default Button;
