@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/app/components/Button";
-import { useFormState } from "react-dom";
-import { tweetSubmit } from "./server";
+// import { useFormState } from "react-dom";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useState } from "react";
@@ -9,16 +8,16 @@ import { RemoveIcon } from "@/app/components/Icon";
 import { formSchema, TweetFormProps } from "./schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { tweetSubmit } from "./server";
 
 export default function AddTweetContent() {
-  const [state, dispatch] = useFormState(tweetSubmit, null);
+  // const [state, dispatch] = useFormState(tweetSubmit, null);
   const [preview, setPreview] = useState([]);
   const [addErrMsg, setAddErrMsg] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm<TweetFormProps>({
     resolver: zodResolver(formSchema),
   });
@@ -44,8 +43,6 @@ export default function AddTweetContent() {
         setAddErrMsg("더이상 사진을 추가할 수 없습니다.");
         return [...prev];
       }
-
-      setValue("file", file);
       return [...prev, imageUrl];
     });
   }
@@ -55,22 +52,20 @@ export default function AddTweetContent() {
     setPreview((prev) => prev.filter((_, i) => i !== index));
   }
 
-  // 검증 이후 처리
-  const onSubmit = handleSubmit(async (data: TweetFormProps) => {
-    const formData = new FormData();
-    formData.append("tweet", data.tweet);
-    formData.append("file", data.file);
-
-    // await tweetSubmit(formData);
-  });
-
   async function onValid() {
+    // 검증 이후 처리
+    const onSubmit = handleSubmit(async (data: TweetFormProps) => {
+      const formData = new FormData();
+      formData.append("tweet", data.tweet);
+      await tweetSubmit(formData);
+    });
+
     await onSubmit();
   }
 
   return (
     <div className="dark:text-white gap-5">
-      <form action={dispatch} className="flex flex-col m-5">
+      <form action={onValid} className="flex flex-col m-5">
         <textarea
           {...register("tweet")}
           placeholder="무슨 일이 일어나고 있나요?"
@@ -95,7 +90,7 @@ export default function AddTweetContent() {
             onChange={onImageChange}
             type="file"
             id="file"
-            {...register("file")}
+            name="file"
             className="hidden"
           />
 

@@ -4,10 +4,9 @@ import getSession from "@/app/lib/session";
 import { redirect } from "next/navigation";
 import { formSchema, TweetSubmitProps } from "./schema";
 
-export async function tweetSubmit(_: any, formData: FormData) {
-  const tweet = formData.get("tweet");
-
-  const result = formSchema.safeParse(tweet);
+export async function tweetSubmit(formData: FormData) {
+  const data = { tweet: formData.get("tweet") };
+  const result = formSchema.safeParse(data);
   let returnErrors: TweetSubmitProps;
 
   if (!result.success) {
@@ -31,6 +30,6 @@ export async function tweetSubmit(_: any, formData: FormData) {
   }
 
   // tweet 저장 (+나중에 이미지 저장 기능 필요, prisma model 변경 필요함.)
-  const tweetResult = await createTweet(result.data, session.id);
+  const tweetResult = await createTweet(result.data.tweet, session.id);
   redirect(`/tweet/${tweetResult.tweet_no}`);
 }
