@@ -2,22 +2,9 @@
 import { createTweet } from "@/app/lib/db";
 import getSession from "@/app/lib/session";
 import { redirect } from "next/navigation";
-import { z } from "zod";
+import { formSchema, TweetSubmitProps } from "./schema";
 
-const formSchema = z
-  .string({
-    required_error: "tweet을 작성해주세요.",
-  })
-  .min(1);
-
-interface TweetSubmitProps {
-  success: boolean;
-  errors?: {
-    tweets?: string[];
-  };
-}
-
-export async function tweetSubmit(_: TweetSubmitProps, formData: FormData) {
+export async function tweetSubmit(_: any, formData: FormData) {
   const tweet = formData.get("tweet");
 
   const result = formSchema.safeParse(tweet);
@@ -43,7 +30,7 @@ export async function tweetSubmit(_: TweetSubmitProps, formData: FormData) {
     return returnErrors;
   }
 
-  // tweet 저장
+  // tweet 저장 (+나중에 이미지 저장 기능 필요, prisma model 변경 필요함.)
   const tweetResult = await createTweet(result.data, session.id);
   redirect(`/tweet/${tweetResult.tweet_no}`);
 }
