@@ -6,6 +6,8 @@ import Tweets from "./Tweets";
 import { useEffect, useRef, useState } from "react";
 import { getTweetsPage } from "./TweetsListServer";
 import Button from "./Button";
+import { PlusIcon } from "@heroicons/react/16/solid";
+import AddTweet from "./AddTweet";
 
 export interface ITweetType {
   tweet: string;
@@ -92,6 +94,8 @@ export default function TweetsList({ success, data }: IProps) {
           ))}
         </div>
       )}
+
+      <AddTweet />
 
       {!lastPage ? (
         <Button

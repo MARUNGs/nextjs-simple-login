@@ -216,4 +216,24 @@ export async function findTweet(id: number): Promise<ITweetType> {
   return tweet;
 }
 
+/**
+ * Tweet 저장
+ * @param tweet
+ * @param user_no
+ * @returns
+ */
+export async function createTweet(tweet: string, user_no: number) {
+  const result = await db.tweet.create({
+    data: {
+      tweet: tweet,
+      user: { connect: { user_no } },
+    },
+    select: {
+      tweet_no: true,
+    },
+  });
+
+  return result;
+}
+
 export default db;
