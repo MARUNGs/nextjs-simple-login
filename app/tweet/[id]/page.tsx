@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CommentList from "@/app/comment/page";
 import TweetContent from "@/app/components/TweetContent";
-import { findComments, getSessionId } from "@/app/comment/server";
+import { getSessionId } from "@/app/comment/server";
 import { unstable_cache as nextCache } from "next/cache";
 
 // 동적 타이틀
