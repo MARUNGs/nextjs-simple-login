@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { ILoginForm } from "../types/login";
-import { ITweetType } from "../components/TweetsList";
 
 const db = new PrismaClient(); // client 생성
 
@@ -240,6 +239,70 @@ export async function createTweet(tweet: string, user_no: number) {
   });
 
   return result;
+}
+
+/**
+ * 트윗의 좋아요 조회
+ * @param tweetNo
+ * @param userId
+ * @returns
+ */
+export async function findTweetLikeStatus(tweetNo: number, userId: number) {
+  const like = await db.like.findUnique({
+    where: {
+      id: {
+        userNo: userId,
+        tweetNo,
+      },
+    },
+  });
+
+  const likeCount = await db.like.count({
+    where: { tweetNo },
+  });
+
+  return {
+    likeCount,
+    isLiked: Boolean(like),
+  };
+}
+
+/**
+ * 트윗의 좋아요 삭제
+ * @param tweetNo
+ * @param userId
+ */
+export async function removeLikeTweet(tweetNo: number, userId: number) {
+  try {
+    await db.like.delete({
+      where: {
+        id: {
+          tweetNo,
+          userNo: userId,
+        },
+      },
+    });
+  } catch (e) {
+    console.log("-- 좋아요 삭제 오류 --", e);
+  }
+}
+
+/**
+ * 트윗의 좋아요 추가
+ * @param tweetNo
+ * @param userId
+ */
+export async function addLikeTweet(tweetNo: number, userId: number) {
+  try {
+    await db.like.create({
+      data: {
+        tweetNo,
+        userNo: userId,
+      },
+    });
+  } catch (e) {
+    console.log("-- 좋아요 추가 오류 --", e);
+  }
 }
 
 export default db;

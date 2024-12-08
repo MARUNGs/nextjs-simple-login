@@ -1,14 +1,11 @@
 // 트윗 상세 페이지 :: 서버
-import { findTweet } from "@/app/lib/db";
-// import { formatToTimeAgo } from "@/app/lib/format";
-// import { UserCircleIcon } from "@heroicons/react/16/solid";
-// import clsx from "clsx";
+import { findTweet, findTweetLikeStatus } from "@/app/lib/db";
 import { Metadata } from "next";
-// import Image from "next/image";
 import { notFound } from "next/navigation";
 import CommentList from "@/app/comment/page";
-// import Link from "next/link";
 import TweetContent from "@/app/components/TweetContent";
+import { findComments, getSessionId } from "@/app/comment/server";
+import { unstable_cache as nextCache } from "next/cache";
 
 // 동적 타이틀
 export async function generateMetadata({ params }): Promise<Metadata> {
@@ -20,18 +17,37 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function Tweet({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   const result = await findTweet(id);
+  const userId = await getSessionId();
 
   if (isNaN(id) || !result) return notFound();
 
-  const {
-    tweet,
-    created_at,
-    user: { username, email, bio },
-  } = result;
+  const { tweet } = result;
+
+  // 캐시관리 :: 좋아요 조회
+  function getCachedLikeStatus(tweetNo: number, userId: number) {
+    const cachedOperation = nextCache(
+      async (tweetNo: number, userId: number) =>
+        findTweetLikeStatus(tweetNo, userId),
+      [`like`],
+      {
+        tags: [`like-status-${tweetNo}`],
+      }
+    );
+
+    return cachedOperation(tweetNo, userId);
+  }
+
+  const { likeCount, isLiked } = await getCachedLikeStatus(id, userId);
 
   return (
     <>
-      <TweetContent tweet={tweet} result={result} />
+      <TweetContent
+        tweetNo={id}
+        tweet={tweet}
+        result={result}
+        likeCount={likeCount}
+        isLiked={isLiked}
+      />
 
       {/* 해당 트윗의 댓글 목록 */}
       <CommentList tweetNo={id} />

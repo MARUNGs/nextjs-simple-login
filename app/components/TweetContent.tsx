@@ -6,21 +6,30 @@ import Image from "next/image";
 import { formatToTimeAgo } from "../lib/format";
 import { useState } from "react";
 import AddComment from "./AddComment";
-import { unstable_cache as nextCache } from "next/cache";
 import LikeButton from "./LikeButton";
 
+interface TweetContentProps {
+  tweetNo: number;
+  tweet: string;
+  result: any;
+  likeCount: number;
+  isLiked: boolean;
+}
+
 export default function TweetContent({
+  tweetNo,
   tweet,
   result,
-}: {
-  tweet: string;
-  result;
-}) {
+  likeCount,
+  isLiked,
+}: TweetContentProps) {
   const [showComment, setShowComment] = useState(false);
 
-  // 댓글 등록 컴포넌트 보여주기 하는 버튼
-  function commentShowToggle() {
-    setShowComment((prev) => !prev);
+  // ----------------------------------------------------------------
+
+  // 댓글 컴포넌트 영역 show/hide 토글
+  function toggle() {
+    setShowComment(!showComment);
   }
 
   return (
@@ -60,10 +69,14 @@ export default function TweetContent({
           </div>
 
           <div className="flex gap-10 hover:*:cursor-pointer hover:*:underline">
-            <div>
+            <div onClick={toggle}>
               comment 💬 <span className="ml-2">{result._count.Comment}</span>
             </div>
-            <LikeButton likeCount={result._count.Like} />
+            <LikeButton
+              likeCount={likeCount}
+              isLiked={isLiked}
+              tweetNo={tweetNo}
+            />
           </div>
         </div>
       </div>

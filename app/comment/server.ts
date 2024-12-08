@@ -3,7 +3,12 @@
 import { redirect } from "next/navigation";
 import { commentSchema } from "./schema";
 import getSession from "@/app/lib/session";
-import db from "@/app/lib/db";
+import db, {
+  addLikeTweet,
+  findTweetLikeStatus,
+  removeLikeTweet,
+} from "@/app/lib/db";
+import { revalidateTag } from "next/cache";
 
 /**
  * 트윗 댓글 조회
@@ -28,6 +33,34 @@ export async function findComments(id: number) {
   });
 
   return comments;
+}
+
+/**
+ * 트윗 좋아요 조회
+ * @param tweetNo 트윗 번호
+ * @returns 좋아요 조회 결과
+ */
+export async function findTweetLike(tweetNo: number) {
+  const userId = await getSessionId();
+  const result = await findTweetLikeStatus(tweetNo, userId);
+  return result;
+}
+
+/**
+ * 댓글 좋아요 기능
+ * @param commentNo 댓글 번호
+ * @param userId 유저 번호(session에서 조회)
+ */
+export async function likeActionToggle(tweetNo: number) {
+  // session에 저장된 userId 조회
+  const userId = await getSessionId();
+  // 현재 session에 저장된 userId의 tweet 좋아요 조회
+  const result = await findTweetLikeStatus(tweetNo, userId);
+
+  if (!result.isLiked) await addLikeTweet(tweetNo, userId);
+  else await removeLikeTweet(tweetNo, userId);
+
+  revalidateTag(`like-status-${tweetNo}`); // 특정 트윗의 캐시관리
 }
 
 /**
