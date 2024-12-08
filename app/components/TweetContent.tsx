@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { formatToTimeAgo } from "../lib/format";
 import { useState } from "react";
-import AddComment from "./AddComment";
+// import AddComment from "./AddComment";
 import LikeButton from "./LikeButton";
 
 interface TweetContentProps {
@@ -82,7 +82,7 @@ export default function TweetContent({
       </div>
 
       {/* 댓글작성 버튼 */}
-      {showComment && <AddComment tweetNo={result.tweet_no} />}
+      {/* {showComment && <AddComment tweetNo={result.tweet_no} />} */}
     </>
   );
 }

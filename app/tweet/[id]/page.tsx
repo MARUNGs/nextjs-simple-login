@@ -6,6 +6,7 @@ import CommentList from "@/app/comment/page";
 import TweetContent from "@/app/components/TweetContent";
 import { getSessionId } from "@/app/comment/server";
 import { unstable_cache as nextCache } from "next/cache";
+import AddComment from "@/app/components/AddComment";
 
 // 동적 타이틀
 export async function generateMetadata({ params }): Promise<Metadata> {
@@ -48,6 +49,8 @@ export default async function Tweet({ params }: { params: { id: string } }) {
         likeCount={likeCount}
         isLiked={isLiked}
       />
+
+      <AddComment tweetNo={id} />
 
       {/* 해당 트윗의 댓글 목록 */}
       <CommentList tweetNo={id} />
