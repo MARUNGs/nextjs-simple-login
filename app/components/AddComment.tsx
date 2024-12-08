@@ -3,16 +3,10 @@
 import Button from "@/app/components/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { CommentFormProps, commentSchema } from "./schema";
-import { commentSubmit } from "./server";
-import { useSearchParams } from "next/navigation";
+import { CommentFormProps, commentSchema } from "../comment/schema";
+import { commentSubmit } from "../comment/server";
 
-export default function AddComment() {
-  const searchParams = useSearchParams();
-  const tweetNo = Number(searchParams.get("tweet_no"));
-
-  console.log(tweetNo);
-
+export default function AddComment({ tweetNo }: { tweetNo: number }) {
   const {
     register,
     handleSubmit,
@@ -20,7 +14,6 @@ export default function AddComment() {
   } = useForm<CommentFormProps>({
     resolver: zodResolver(commentSchema),
   });
-  console.log(tweetNo);
 
   // form action
   async function onValid() {
@@ -28,8 +21,6 @@ export default function AddComment() {
       if (!tweetNo) return;
 
       const formData = new FormData();
-      console.log(data.comment);
-
       formData.append("comment", data.comment);
       formData.append("tweet_no", tweetNo.toString());
 
@@ -45,7 +36,7 @@ export default function AddComment() {
         <textarea
           {...register("comment")}
           placeholder="참신한 댓글이 필요해 보이네요."
-          className="w-full h-96 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent resize-none  dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-400"
+          className="w-full h-32 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent resize-none  dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-400"
         />
         {errors && <div>{errors.comment?.message}</div>}
         <input type="text" name="userNo" className="hidden" />

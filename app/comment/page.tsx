@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { formatToTimeAgo } from "../lib/format";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import { findComments } from "./add/server";
+import { findComments } from "./server";
 
 export default async function CommentList({ tweetNo }: { tweetNo: number }) {
   const comments = await findComments(tweetNo);
