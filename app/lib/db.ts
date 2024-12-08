@@ -189,7 +189,7 @@ export async function getTweets(page: number) {
  * @param id
  * @returns
  */
-export async function findTweet(id: number): Promise<ITweetType> {
+export async function findTweet(id: number) {
   const tweet = await db.tweet.findUnique({
     where: { tweet_no: id },
     include: {
@@ -208,6 +208,12 @@ export async function findTweet(id: number): Promise<ITweetType> {
               user_no: true,
             },
           },
+        },
+      },
+      _count: {
+        select: {
+          Like: true,
+          Comment: true,
         },
       },
     },
