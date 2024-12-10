@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
-import { BackIcon, Chat } from "./Icon";
+import { BackIcon, Chat } from "../Icon";
 import { logout } from "./NavigationServer";
 import Link from "next/link";
 

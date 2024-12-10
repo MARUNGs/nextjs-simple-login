@@ -1,4 +1,4 @@
-import Navigation from "@/app/components/Navigation";
+import Navigation from "@/app/components/navigation/Navigation";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
