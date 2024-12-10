@@ -2,7 +2,7 @@
 "use client";
 
 import { useOptimistic } from "react";
-import { likeActionToggle } from "../comment/server";
+import { likeActionToggle } from "./comment/server";
 
 interface LikeButtonProps {
   isLiked: boolean;

@@ -3,8 +3,8 @@
 import Button from "@/app/components/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { CommentFormProps, commentSchema } from "../comment/schema";
-import { commentSubmit } from "../comment/server";
+import { CommentFormProps, commentSchema } from "./comment/schema";
+import { commentSubmit } from "./comment/server";
 
 export default function AddComment({ tweetNo }: { tweetNo: number }) {
   const {
