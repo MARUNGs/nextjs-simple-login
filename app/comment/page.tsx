@@ -3,8 +3,9 @@ import { formatToTimeAgo } from "../lib/format";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { findComments } from "./server";
+import { CommentListProps } from "../types/CommentListType";
 
-export default async function CommentList({ tweetNo }: { tweetNo: number }) {
+export default async function CommentList({ tweetNo }: CommentListProps) {
   const comments = await findComments(tweetNo);
 
   return (
