@@ -3,10 +3,10 @@
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import Image from "next/image";
-import { formatToTimeAgo } from "../lib/format";
+import { formatToTimeAgo } from "../../lib/format";
 import { useState } from "react";
-import LikeButton from "./LikeButton";
-import { TweetContentProps } from "../types/TweetContentType";
+import LikeButton from "../LikeButton";
+import { TweetContentProps } from "../../types/TweetContentType";
 
 export default function TweetContent({
   tweetNo,

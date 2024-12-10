@@ -5,8 +5,8 @@ import Tweets from "./Tweets";
 
 import { useEffect, useRef, useState } from "react";
 import { getTweetsPage } from "./TweetsListServer";
-import Button from "./Button";
-import AddTweet from "./AddTweet";
+import Button from "../Button";
+import AddTweet from "../Tweet/AddTweet";
 
 export interface ITweetType {
   tweet: string;

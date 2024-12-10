@@ -1,7 +1,7 @@
 // 메인화면
 import clsx from "clsx";
 import { getTweetsInit } from "../lib/db";
-import TweetsList from "../components/TweetsList";
+import TweetsList from "../components/Tweet/TweetsList";
 import { Prisma } from "@prisma/client";
 
 export type PrismaType = Prisma.PromiseReturnType<typeof getTweetsInit>;

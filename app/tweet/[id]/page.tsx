@@ -3,7 +3,7 @@ import { findTweet, findTweetLikeStatus } from "@/app/lib/db";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CommentList from "@/app/components/comment/CommentList";
-import TweetContent from "@/app/components/TweetContent";
+import TweetContent from "@/app/components/Tweet/TweetContent";
 import { getSessionId } from "@/app/components/comment/server";
 import { unstable_cache as nextCache } from "next/cache";
 import AddComment from "@/app/components/comment/AddComment";
