@@ -5,16 +5,8 @@ import clsx from "clsx";
 import Image from "next/image";
 import { formatToTimeAgo } from "../lib/format";
 import { useState } from "react";
-// import AddComment from "./AddComment";
 import LikeButton from "./LikeButton";
-
-interface TweetContentProps {
-  tweetNo: number;
-  tweet: string;
-  result: any;
-  likeCount: number;
-  isLiked: boolean;
-}
+import { TweetContentProps } from "../types/TweetContentType";
 
 export default function TweetContent({
   tweetNo,
