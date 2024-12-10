@@ -6,9 +6,10 @@ import { Prisma } from "@prisma/client";
 
 export type PrismaType = Prisma.PromiseReturnType<typeof getTweetsInit>;
 
-async function TweetsLoading() {
-  return new Promise((resolve) => setTimeout(resolve, 10000));
-}
+// loading 화면 주석처리
+// async function TweetsLoading() {
+//   return new Promise((resolve) => setTimeout(resolve, 10000));
+// }
 
 export default async function Home() {
   // await TweetsLoading();
