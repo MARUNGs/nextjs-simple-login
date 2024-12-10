@@ -6,7 +6,7 @@ import CommentList from "@/app/components/comment/CommentList";
 import TweetContent from "@/app/components/TweetContent";
 import { getSessionId } from "@/app/components/comment/server";
 import { unstable_cache as nextCache } from "next/cache";
-import AddComment from "@/app/components/AddComment";
+import AddComment from "@/app/components/comment/AddComment";
 
 // 동적 타이틀
 export async function generateMetadata({ params }): Promise<Metadata> {
