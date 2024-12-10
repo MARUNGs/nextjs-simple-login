@@ -2,6 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { BackIcon, Chat } from "./Icon";
 import { logout } from "./NavigationServer";
+import Link from "next/link";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -35,11 +36,15 @@ export default function Navigation() {
             <Chat width="40" height="40" />
           </div>
 
-          <form action={logout} className="flex-1 flex justify-end">
-            <button type="submit" className="dark:text-white hover:underline">
-              로그아웃
-            </button>
-          </form>
+          <div className="flex-1 flex justify-end">
+            <Link href="/profile">프로필</Link>
+
+            <form action={logout} className="flex-1 flex justify-end">
+              <button type="submit" className="dark:text-white hover:underline">
+                로그아웃
+              </button>
+            </form>
+          </div>
         </>
       )}
     </div>
