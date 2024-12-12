@@ -32,3 +32,23 @@ export async function searchTweets(formData: FormData) {
 
   return result;
 }
+
+/**
+ * 사용자 리스트 조회
+ * @param formData
+ * @returns
+ */
+export async function searchUsers(formData: FormData) {
+  const keyword = formData.get("keyword") as string;
+
+  const users = await db.user.findMany({
+    where: {
+      username: {
+        contains: keyword,
+      },
+    },
+  });
+
+  console.log(users);
+  return users;
+}

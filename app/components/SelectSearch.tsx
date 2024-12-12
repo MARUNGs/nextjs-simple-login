@@ -1,19 +1,22 @@
+"use client";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 interface SelectSearchProps {
-  customValue: string[];
   customSize?: string;
+  selected?: string;
   onSelectChange?: (value: string) => void;
 }
 
 export default function SelectSearch({
-  customValue,
   customSize,
-  onSelectChange,
+  selected,
 }: SelectSearchProps) {
+  const router = useRouter();
+
   // select option 변경 이벤트
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    onSelectChange(e.target.value);
+    router.push(`/${e.target.value}`);
   }
 
   return (
@@ -35,9 +38,12 @@ export default function SelectSearch({
         )}`}
         onChange={onChange}
       >
-        {customValue.map((value) => (
-          <option value={value}>{value}</option>
-        ))}
+        <option selected={selected === "search"} value="search">
+          search
+        </option>
+        <option selected={selected === "users"} value="users">
+          users
+        </option>
       </select>
     </>
   );
