@@ -36,21 +36,13 @@ export default function Search() {
       formData.append("keyword", data.keyword);
 
       const result = await searchTweets(formData);
-      console.log(result.length);
-      if (result.length === 0) {
-        setSearch([]);
-        setResultFlag(false);
-      } else {
-        setSearch(result);
-        setResultFlag(true);
-      }
+
+      setSearch(result);
+      setResultFlag(result.length > 0);
     });
 
     await onSubmit();
   }
-
-  console.log("search 상태");
-  console.log(search);
 
   return (
     <>

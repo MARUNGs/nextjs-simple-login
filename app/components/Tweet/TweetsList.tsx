@@ -35,6 +35,13 @@ export default function TweetsList({ success, data }: IProps) {
   const [loading, setLoading] = useState(false);
   const [lastPage, setLastPage] = useState(false);
 
+  // data props이 변경될때마다 tweets 상태 업데이트
+  useEffect(() => {
+    setTweets(data);
+    setPage(0);
+    setLastPage(false);
+  }, [data]);
+
   // 무한스크롤 트리거 감지
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -76,7 +83,7 @@ export default function TweetsList({ success, data }: IProps) {
 
   return (
     <>
-      {success && (
+      {success && data.length > 0 && (
         <div
           className={`${clsx(
             "sm:w-[620px]",
