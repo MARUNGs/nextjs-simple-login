@@ -13,10 +13,12 @@ import { InputSchema, inputSchema } from "./schema";
 import { searchTweets } from "./server";
 import { useState } from "react";
 import TweetsList from "@/app/components/Tweet/TweetsList";
+import SelectSearch from "@/app/components/SelectSearch";
 
 export default function Search() {
   const [search, setSearch] = useState([]);
   const [resultFlag, setResultFlag] = useState(false);
+  const [searchType, setSearchType] = useState("search");
   const {
     register,
     handleSubmit,
@@ -44,9 +46,21 @@ export default function Search() {
     await onSubmit();
   }
 
+  // 검색 타입 변경
+  function handleSearchTypeChange(value: string) {
+    setSearchType(value);
+  }
+
+  console.log(searchType);
+
   return (
     <>
       <div className={`${clsx("flex flex-row justify-center items-center")}`}>
+        <SelectSearch
+          onSelectChange={handleSearchTypeChange}
+          customValue={["search", "users"]}
+          customSize={"w-20"}
+        />
         <form action={onValid}>
           <input
             className={`${clsx(
@@ -62,11 +76,14 @@ export default function Search() {
         </form>
       </div>
 
-      <div className={`${clsx("flex flex-col justify-center items-center")}`}>
-        {resultFlag && search.length > 0 && (
-          <TweetsList success={resultFlag} data={search} />
-        )}
-      </div>
+      {/* search인 경우 */}
+      {searchType === "search" && (
+        <div className={`${clsx("flex flex-col justify-center items-center")}`}>
+          {resultFlag && search.length > 0 && (
+            <TweetsList success={resultFlag} data={search} />
+          )}
+        </div>
+      )}
     </>
   );
 }
