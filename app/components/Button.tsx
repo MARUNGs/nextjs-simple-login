@@ -6,16 +6,18 @@ import { useFormStatus } from "react-dom";
 interface ButtonProps {
   text: string;
   custom?: string;
+  type?: "button" | "submit" | "reset";
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ text, custom }, ref) => {
+  ({ text, custom, type }, ref) => {
     const { pending } = useFormStatus();
 
     return (
       <button
         ref={ref}
         disabled={pending}
+        type={type}
         className={clsx(
           "bg-stone-300 pt-2 pb-2 font-semibold text-black",
           "active:scale-90 transition-transform",

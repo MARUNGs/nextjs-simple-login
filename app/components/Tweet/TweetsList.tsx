@@ -2,11 +2,10 @@
 "use client";
 import clsx from "clsx";
 import Tweets from "./Tweets";
-
 import { useEffect, useRef, useState } from "react";
 import { getTweetsPage } from "./TweetsListServer";
 import Button from "../Button";
-import AddTweet from "../Tweet/AddTweet";
+import AddTweet from "../bottomButton/AddTweet";
 
 export interface ITweetType {
   tweet: string;
