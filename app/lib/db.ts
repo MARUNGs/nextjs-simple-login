@@ -313,7 +313,7 @@ export async function addLikeTweet(tweetNo: number, userId: number) {
 export async function findUserInfo(username: string) {
   const user = await db.user.findUnique({
     where: { username },
-    select: { user_no: true, username: true, email: true },
+    select: { user_no: true, username: true, email: true, bio: true },
   });
 
   return user;
