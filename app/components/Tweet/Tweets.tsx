@@ -24,16 +24,16 @@ export default function Tweets({ ...props }: ITweetType) {
           <div className="flex items-center ml-3 my-5">
             {/* 이미지 */}
             <div className="size-10 mr-3 relative aspect-square">
-              {props.user.bio ? (
+              {/* {props.user.bio ? (
                 <Image
                   className="object-cover"
                   src={props.user.bio}
                   alt="user"
                   fill
                 />
-              ) : (
-                <UserCircleIcon className="size-10" />
-              )}
+              ) : ( */}
+              <UserCircleIcon className="size-10" />
+              {/* )} */}
             </div>
 
             {/* 유저 정보 */}

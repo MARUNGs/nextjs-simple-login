@@ -38,16 +38,16 @@ export default function TweetContent({
         <div className="flex flex-col *:ml-3 *:mb-5">
           <div className="flex items-center ml-3 my-5">
             <div className="size-10 mr-3 relative aspect-square">
-              {result.user.bio && result.user.bio !== "" ? (
+              {/* {result.user.bio && result.user.bio !== "" ? (
                 <Image
                   className="object-cover"
                   src={result.user.bio}
                   alt="user"
                   fill
                 />
-              ) : (
-                <UserCircleIcon className="size-10" />
-              )}
+              ) : ( */}
+              <UserCircleIcon className="size-10" />
+              {/* )} */}
             </div>
 
             <span className="font-semibold">{result.user.username}</span>
