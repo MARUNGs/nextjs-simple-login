@@ -10,8 +10,12 @@ import { searchUsers } from "../search/server";
 import { inputSchema, InputSchema } from "../search/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Card from "@/app/components/Card";
+import { usePathname } from "next/navigation";
+import UserCard from "@/app/components/card/UserCard";
 
 export default function Users() {
+  const pathname = usePathname();
   const [users, setUsers] = useState([]);
   const [resultFlag, setResultFlag] = useState(false);
   const [searchType, setSearchType] = useState("users");
@@ -68,6 +72,19 @@ export default function Users() {
 
       {
         // users 정보 호출 :: CardList
+        resultFlag && (
+          <div
+            className={`${clsx(
+              "grid grid-cols-1 gap-4 mt-4",
+              "sm:grid-cols-2 md:grid-cols-3",
+              "mx-5"
+            )}`}
+          >
+            {users.map((user, i) => (
+              <UserCard key={i} user={user} />
+            ))}
+          </div>
+        )
       }
     </>
   );
