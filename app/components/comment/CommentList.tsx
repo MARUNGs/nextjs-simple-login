@@ -43,7 +43,9 @@ export default async function CommentList({ tweetNo }: CommentListProps) {
                 {formatToTimeAgo(comment.created_at.toString())}
               </span>
             </div>
-            <div className="text-stone-700 text-base">{comment.payload}</div>
+            <div className="text-stone-700 text-base dark:text-stone-100">
+              {comment.payload}
+            </div>
             <div className="flex items-center justify-center h-full" />
           </div>
         ))}

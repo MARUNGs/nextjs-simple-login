@@ -10,12 +10,9 @@ import { searchUsers } from "../search/server";
 import { inputSchema, InputSchema } from "../search/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Card from "@/app/components/Card";
-import { usePathname } from "next/navigation";
 import UserCard from "@/app/components/card/UserCard";
 
 export default function Users() {
-  const pathname = usePathname();
   const [users, setUsers] = useState([]);
   const [resultFlag, setResultFlag] = useState(false);
   const [searchType, setSearchType] = useState("users");
