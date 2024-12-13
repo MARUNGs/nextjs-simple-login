@@ -74,7 +74,7 @@ export default function Users() {
             className={`${clsx(
               "grid grid-cols-1 gap-4 mt-4",
               "sm:grid-cols-2 md:grid-cols-3",
-              "mx-5"
+              "mx-5 mt-10"
             )}`}
           >
             {users.map((user, i) => (

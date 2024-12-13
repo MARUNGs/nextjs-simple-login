@@ -21,7 +21,7 @@ export default function UserCard({ user }: UserCardProps) {
         {/* 버튼 :: 정보보기 */}
         <div className="flex mt-6 hover:cursor-pointer">
           <Link
-            href={`/users/{user.username}`}
+            href={`/users/${user.username}`}
             className={`$(clsx("dark:text-white"))`}
           >
             <span
