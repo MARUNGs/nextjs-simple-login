@@ -34,7 +34,7 @@ export default async function Profile() {
         <h3 className="text-xl">환영합니다! {user.username}님!</h3>
       </div>
       <div className="flex flex-col items-center my-10 w-4/5 ">
-        <Card username={user.username} />
+        <Card userNo={user.user_no} username={user.username} />
       </div>
     </div>
   );

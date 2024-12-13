@@ -1,9 +1,16 @@
 "use client";
 
 import clsx from "clsx";
+import Link from "next/link";
 import { useState } from "react";
 
-export default function Card({ username }: { username: string }) {
+export default function Card({
+  userNo,
+  username,
+}: {
+  userNo: number;
+  username: string;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const dropDownBtn = () => {
@@ -49,12 +56,12 @@ export default function Card({ username }: { username: string }) {
             aria-labelledby="dropdownButton"
           >
             <li>
-              <a
-                href="#"
+              <Link
+                href={`/users/${username}/edit?userNo=${userNo}`}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
                 Edit
-              </a>
+              </Link>
             </li>
             <li>
               <a
