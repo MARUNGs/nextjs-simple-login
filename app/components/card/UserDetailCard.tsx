@@ -34,11 +34,11 @@ export default function UserDetailCard({
           <h3 className="text-xl">{user.username}님 페이지입니다.</h3>
         </div>
         <div className="flex flex-col items-center my-10 w-4/5 ">
-          <UserCardContent username={user.username} same={same} />
+          <UserCardContent user={user} same={same} />
         </div>
       </div>
 
-      <div className="">
+      <div>
         <h2 className="mx-20 font-semibold text-lg dark:text-stone-50">
           댓글목록
         </h2>

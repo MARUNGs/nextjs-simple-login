@@ -3,24 +3,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { formatToTimeAgo } from "@/app/lib/format";
-
-// Comment 인터페이스를 가져옵니다.
-interface Comment {
-  created_at: Date;
-  updated_at: Date;
-  userNo: number;
-  tweetNo: number;
-  payload: string;
-  user: {
-    username: string;
-    email: string;
-    bio: string;
-  };
-}
-
-interface UserCommentListProps {
-  comments: Comment[]; // comments의 타입을 설정합니다.
-}
+import { UserCommentListProps } from "@/app/types/CommentListType";
 
 export default function UserCommentList({ comments }: UserCommentListProps) {
   return (

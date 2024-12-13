@@ -5,10 +5,7 @@ import { MoreButton, ProfileIcon } from "../Icon";
 import Link from "next/link";
 import { UserCardContentProps } from "@/app/types/UserCardType";
 
-export default function UserCardContent({
-  username,
-  same,
-}: UserCardContentProps) {
+export default function UserCardContent({ user, same }: UserCardContentProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const dropDownBtn = () => {
@@ -25,8 +22,6 @@ export default function UserCardContent({
       alert("준비중입니다.");
     }
   }
-
-  function showCommentList() {}
 
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -54,7 +49,7 @@ export default function UserCardContent({
           >
             <li>
               <Link
-                href={`/users/${username}/edit`}
+                href={`/users/${user.username}/edit?userNo=${user.user_no}`}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
                 Edit
@@ -75,10 +70,10 @@ export default function UserCardContent({
       <div className="flex flex-col items-center pb-10">
         <ProfileIcon />
         <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-          {username}
+          {user.username}
         </h5>
         <span className="text-sm text-gray-500 dark:text-gray-400">
-          {username.split("@")[0]}
+          {user.username.split("@")[0]}
         </span>
       </div>
     </div>

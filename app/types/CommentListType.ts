@@ -27,3 +27,7 @@ export interface UserDetailCardProps {
   sessionId: number;
   userCommentList: ICommentProps[];
 }
+
+export interface UserCommentListProps {
+  comments: ICommentProps[]; // comments의 타입을 설정합니다.
+}

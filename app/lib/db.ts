@@ -305,4 +305,18 @@ export async function addLikeTweet(tweetNo: number, userId: number) {
   }
 }
 
+/**
+ * [수정] 사용자 조회
+ * @param id
+ * @returns
+ */
+export async function findUserInfo(username: string) {
+  const user = await db.user.findUnique({
+    where: { username },
+    select: { user_no: true, username: true, email: true },
+  });
+
+  return user;
+}
+
 export default db;
