@@ -48,6 +48,7 @@ export default function Home() {
           placeholder="비밀번호를 입력하세요."
           className="grow"
           required
+          autoComplete="true"
           minLength={validation.PASSWORD_VALIDATION.min.value}
           errors={state?.errors.password}
         />
