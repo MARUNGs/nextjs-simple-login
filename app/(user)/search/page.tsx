@@ -51,7 +51,11 @@ export default function Search() {
   return (
     <>
       <div className={`${clsx("flex flex-row justify-center items-center")}`}>
-        <SelectSearch selected={searchType} customSize={"w-20"} />
+        <SelectSearch
+          selected={searchType}
+          customSize={"w-20"}
+          onSelectChange={setSearchType}
+        />
         <form action={onValid}>
           <input
             className={`${clsx(

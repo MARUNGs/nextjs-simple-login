@@ -11,12 +11,17 @@ interface SelectSearchProps {
 export default function SelectSearch({
   customSize,
   selected,
+  onSelectChange,
 }: SelectSearchProps) {
   const router = useRouter();
 
   // select option 변경 이벤트
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
     router.push(`/${e.target.value}`);
+
+    if (onSelectChange) {
+      onSelectChange(e.target.value);
+    }
   }
 
   return (
@@ -36,14 +41,11 @@ export default function SelectSearch({
           "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-stone-500 dark:focus:border-stone-500",
           customSize
         )}`}
+        value={selected}
         onChange={onChange}
       >
-        <option selected={selected === "search"} value="search">
-          search
-        </option>
-        <option selected={selected === "users"} value="users">
-          users
-        </option>
+        <option value="search">search</option>
+        <option value="users">users</option>
       </select>
     </>
   );

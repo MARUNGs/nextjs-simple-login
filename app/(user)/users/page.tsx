@@ -45,7 +45,11 @@ export default function Users() {
   return (
     <>
       <div className={`${clsx("flex flex-row justify-center items-center")}`}>
-        <SelectSearch customSize={"w-20"} selected={searchType} />
+        <SelectSearch
+          customSize={"w-20"}
+          selected={searchType}
+          onSelectChange={setSearchType}
+        />
 
         <form action={onValid}>
           <input
@@ -61,6 +65,10 @@ export default function Users() {
           <Button custom="w-20 text-sm" type="submit" text="Search" />
         </form>
       </div>
+
+      {
+        // users 정보 호출 :: CardList
+      }
     </>
   );
 }
