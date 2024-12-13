@@ -1,20 +1,14 @@
 "use client";
 import clsx from "clsx";
-import Card from "../Card";
 import { useEffect, useState } from "react";
 import UserCardContent from "./UserCardContent";
-
-interface UserDetailCardProps {
-  user: {
-    username: string;
-    user_no: number;
-  };
-  sessionId: number;
-}
+import UserCommentList from "../comment/UserCommentList";
+import { UserDetailCardProps } from "@/app/types/CommentListType";
 
 export default function UserDetailCard({
   user,
   sessionId,
+  userCommentList,
 }: UserDetailCardProps) {
   const [same, setSame] = useState(false);
 
@@ -25,22 +19,28 @@ export default function UserDetailCard({
   }, [user.user_no, sessionId]);
 
   return (
-    <div className="flex flex-col items-center">
-      <div
-        className={`${clsx(
-          "w-4/5 h-1/2",
-          "*:text-center",
-          "dark:*:text-white"
-        )}`}
-      >
-        <h1 className={`${clsx("dark:text-white", "text-5xl my-5")}`}>
-          User Info
-        </h1>
-        <h3 className="text-xl">{user.username}님 페이지입니다.</h3>
+    <>
+      <div className="flex flex-col items-center">
+        <div
+          className={`${clsx(
+            "w-4/5 h-1/2",
+            "*:text-center",
+            "dark:*:text-white"
+          )}`}
+        >
+          <h1 className={`${clsx("dark:text-white", "text-5xl my-5")}`}>
+            User Info
+          </h1>
+          <h3 className="text-xl">{user.username}님 페이지입니다.</h3>
+        </div>
+        <div className="flex flex-col items-center my-10 w-4/5 ">
+          <UserCardContent username={user.username} same={same} />
+        </div>
       </div>
-      <div className="flex flex-col items-center my-10 w-4/5 ">
-        <UserCardContent username={user.username} same={same} />
+
+      <div>
+        <UserCommentList comments={userCommentList} />
       </div>
-    </div>
+    </>
   );
 }

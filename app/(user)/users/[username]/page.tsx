@@ -1,12 +1,8 @@
 import { notFound } from "next/navigation";
 import { findSearchUser, getLoginUser } from "./server";
 import UserDetailCard from "@/app/components/card/UserDetailCard";
-
-interface ParamProps {
-  params: {
-    username: string;
-  };
-}
+import { findUserCommentList } from "@/app/components/comment/server";
+import { ParamProps } from "@/app/types/UserCardType";
 
 /**
  * 특정사용자의 정보 + 댓글리스트 조회 화면
@@ -23,5 +19,14 @@ export default async function User({ params }: ParamProps) {
   // 현재 로그인한 사용자 조회
   const sessionId = await getLoginUser();
 
-  return <UserDetailCard user={searchUser} sessionId={sessionId} />;
+  // 특정 유저의 댓글리스트 조회
+  const userCommentList = await findUserCommentList(searchUser.user_no);
+
+  return (
+    <UserDetailCard
+      user={searchUser}
+      sessionId={sessionId}
+      userCommentList={userCommentList}
+    />
+  );
 }

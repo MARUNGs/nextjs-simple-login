@@ -110,3 +110,28 @@ export async function commentSubmit(formData: FormData, tweet_no: number) {
 
   redirect(`/tweet/${tweet_no}`);
 }
+
+/**
+ * 사용자의 댓글리스트 조회
+ * @param userNo
+ * @returns
+ */
+export async function findUserCommentList(userNo: number) {
+  const comments = await db.comment.findMany({
+    where: { userNo },
+    include: {
+      user: {
+        select: {
+          username: true,
+          bio: true,
+          email: true,
+        },
+      },
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+
+  return comments;
+}
