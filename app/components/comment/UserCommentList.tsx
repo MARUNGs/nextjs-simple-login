@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import Image from "next/image";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
@@ -21,13 +22,12 @@ interface UserCommentListProps {
   comments: Comment[]; // comments의 타입을 설정합니다.
 }
 
-export default async function UserCommentList({
-  comments,
-}: UserCommentListProps) {
+export default function UserCommentList({ comments }: UserCommentListProps) {
   return (
     <div
       className={`${clsx(
-        "grid grid-cols-[1fr 100px] gap-4",
+        "grid grid-cols-1 gap-4 mt-4",
+        "sm:grid-cols-2 md:grid-cols-3",
         "my-5 ml-14",
         "group",
         "dark:text-white",

@@ -38,7 +38,10 @@ export default function UserDetailCard({
         </div>
       </div>
 
-      <div>
+      <div className="">
+        <h2 className="mx-20 font-semibold text-lg dark:text-stone-50">
+          댓글목록
+        </h2>
         <UserCommentList comments={userCommentList} />
       </div>
     </>
