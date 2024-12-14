@@ -1,6 +1,6 @@
 import { InfoIcon } from "./Icon";
 
-export default function Alert() {
+export default function Alert({ text }: { text: string }) {
   return (
     <>
       <div
@@ -8,7 +8,7 @@ export default function Alert() {
         role="alert"
       >
         <InfoIcon />
-        <div className="ms-3 text-sm font-medium">Welcome back!</div>
+        <div className="ms-3 text-sm font-medium">{text}</div>
       </div>
     </>
   );

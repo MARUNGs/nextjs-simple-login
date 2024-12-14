@@ -7,6 +7,7 @@ import {
   fineUserPassword,
 } from "@/app/lib/db";
 import { editFormSchema } from "./schema";
+import { revalidatePath } from "next/cache";
 
 /**
  * [수정] 사용자 정보 수정
@@ -88,5 +89,7 @@ export async function edit(formData: FormData) {
     email: undefined, // 오류없음
     password: undefined, // 오류없음
   };
+
+  revalidatePath(`/users/${user_no}/edit`);
   return returnResult;
 }

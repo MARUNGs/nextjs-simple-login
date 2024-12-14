@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editFormSchema } from "@/app/(user)/users/[username]/edit/schema";
 import { edit } from "@/app/(user)/users/[username]/edit/server";
-import { useEffect, useState } from "react";
+import { useEffect, useOptimistic, useState } from "react";
 
 interface IEditProps {
   username: string;
@@ -29,12 +29,24 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
     resolver: zodResolver(editFormSchema),
   });
 
-  useEffect(() => {
-    setUserNo(user.user_no);
-  }, []);
+  // 화면 진입하면 유저번호를 바로 세팅한다.
+  useEffect(() => setUserNo(user.user_no), []);
 
+  //------------------------------------------------------------------------------------
+  const [state, reducer] = useOptimistic(
+    { username: user.username, email: user.email, bio: user.bio },
+    (prevState, _) => {
+      return {
+        ...prevState,
+        password: null,
+        newPassword: null,
+        passwordConfirm: null,
+      };
+    }
+  );
+
+  // 검증 이후 처리
   async function onValid() {
-    // 검증 이후 처리
     const onSubmit = handleSubmit(
       async ({
         username,
@@ -44,6 +56,8 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
         newPassword,
         passwordConfirm,
       }: IEditProps) => {
+        reducer({ username, email, bio });
+
         const formData = new FormData();
         formData.append("userNo", userNo + "");
         formData.append("username", username);
@@ -64,6 +78,8 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
 
     await onSubmit();
   }
+
+  //------------------------------------------------------------------------------------
 
   return (
     <>
@@ -94,7 +110,7 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
               placeholder="사용자명을 입력하세요."
               {...register("username")}
               required
-              defaultValue={user.username}
+              defaultValue={state.username ?? user.username}
               errors={errors.username && [errors.username?.message]}
             />
             <Input
@@ -103,7 +119,7 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
               placeholder="이메일을 입력하세요."
               required
               {...register("email")}
-              defaultValue={user.email}
+              defaultValue={state.email ?? user.email}
               errors={errors.email && [errors.email?.message]}
             />
             <Input
@@ -112,7 +128,7 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
               placeholder="소개를 입력하세요."
               required
               {...register("bio")}
-              defaultValue={user.bio}
+              defaultValue={state.bio ?? user.bio}
               errors={errors.bio && [errors.bio?.message]}
             />
             <Input
