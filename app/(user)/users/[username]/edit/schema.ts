@@ -36,7 +36,18 @@ export const editFormSchema = zod
         required_error: usernameRequired.message,
       })
       .min(usernameMin.value, usernameMin.message),
+    // 유효성검증할 만한 것이 없다해도, RHF + Zod를 구현한 상태라면 무조건 zod.object에 포함시켜야한다.
+    // 아무거나 유효성검증을 넣자.
+    bio: zod.string({
+      description: "소개글",
+    }),
     password: zod
+      .string({
+        required_error: pwRequired.message,
+      })
+      .regex(pwRegex.value, pwRegex.message)
+      .min(pwMin.value, pwMin.message),
+    newPassword: zod
       .string({
         required_error: pwRequired.message,
       })
@@ -49,9 +60,9 @@ export const editFormSchema = zod
       .regex(pwRegex.value, pwRegex.message)
       .min(pwMin.value, pwMin.message),
   })
-  .superRefine(({ password, passwordConfirm }, ctx) => {
+  .superRefine(({ newPassword, passwordConfirm }, ctx) => {
     // 비밀번호 확인
-    if (password !== passwordConfirm) {
+    if (newPassword !== passwordConfirm) {
       ctx.addIssue({
         code: zod.ZodIssueCode.custom,
         path: ["passwordConfirm"],

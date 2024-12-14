@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editFormSchema } from "@/app/(user)/users/[username]/edit/schema";
 import { edit } from "@/app/(user)/users/[username]/edit/server";
+import { useEffect, useState } from "react";
 
 interface IEditProps {
   username: string;
@@ -13,10 +14,12 @@ interface IEditProps {
   bio: string;
   user_no: number;
   password?: string;
+  newPassword?: string;
   passwordConfirm?: string;
 }
 
 export default function UserEditContent({ user }: { user: IEditProps }) {
+  const [userNo, setUserNo] = useState(null);
   const {
     register,
     handleSubmit,
@@ -26,18 +29,36 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
     resolver: zodResolver(editFormSchema),
   });
 
+  useEffect(() => {
+    setUserNo(user.user_no);
+  }, []);
+
   async function onValid() {
     // 검증 이후 처리
     const onSubmit = handleSubmit(
-      async ({ user_no, username, email, bio, password }: IEditProps) => {
+      async ({
+        username,
+        email,
+        bio,
+        password,
+        newPassword,
+        passwordConfirm,
+      }: IEditProps) => {
         const formData = new FormData();
-        formData.append("userNo", user_no + "");
+        formData.append("userNo", userNo + "");
         formData.append("username", username);
         formData.append("email", email);
         formData.append("bio", bio);
         formData.append("password", password);
+        formData.append("newPassword", newPassword);
+        formData.append("passwordConfirm", passwordConfirm);
 
         const result = await edit(formData);
+        if (!result.success) {
+          result.username && setError("username", result.username); // 사용자명 오류
+          result.email && setError("email", result.email); // 이메일 오류
+          result.password && setError("password", result.password); // 비밀번호 오류
+        }
       }
     );
 
@@ -105,10 +126,20 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
             />
             <Input
               type="password"
+              id="newPassword"
+              required
+              {...register("newPassword")}
+              placeholder="새로운 비밀번호를 입력하세요."
+              autoComplete="true"
+              errors={errors.newPassword && [errors.newPassword?.message]}
+            />
+
+            <Input
+              type="password"
               id="passwordConfirm"
               required
               {...register("passwordConfirm")}
-              placeholder="비밀번호 확인을 입력하세요."
+              placeholder="새로운 비밀번호 확인을 입력하세요."
               autoComplete="true"
               errors={
                 errors.passwordConfirm && [errors.passwordConfirm?.message]

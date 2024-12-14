@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { ILoginForm } from "../types/login";
+import { boolean } from "zod";
 
 const db = new PrismaClient(); // client 생성
 
@@ -372,10 +373,33 @@ interface IProps {
 }
 export async function editUser({
   user_no,
-  username,
   email,
+  username,
   bio,
   password,
-}: IProps) {}
+}: IProps) {
+  try {
+    const updateUser = await db.user.update({
+      where: { user_no },
+      data: {
+        email,
+        username,
+        bio,
+        password,
+      },
+    });
+
+    return {
+      success: Boolean(updateUser),
+      data: updateUser,
+    };
+  } catch (e) {
+    console.log(`edit error :: ${e}`);
+    return {
+      success: false,
+      data: null,
+    };
+  }
+}
 
 export default db;

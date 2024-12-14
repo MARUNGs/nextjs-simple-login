@@ -16,6 +16,6 @@ export default async function UserEdit({
   const { username } = params;
   const decodedUsername = decodeURIComponent(username); // url 디코딩 :: username 중 @가 포함되어 있어서 디코딩 수행
   const user = await findUserInfo(decodedUsername);
-
+  console.log(user);
   return <UserEditContent user={user} />;
 }
