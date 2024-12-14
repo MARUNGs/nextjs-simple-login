@@ -319,4 +319,63 @@ export async function findUserInfo(username: string) {
   return user;
 }
 
+/**
+ * [수정] 이메일이 유니크한지 찾기
+ */
+export async function findEmailUnique(email: string, user_no: number) {
+  const user = await db.user.findUnique({
+    where: { user_no, email },
+  });
+
+  return {
+    success: Boolean(user),
+    data: user,
+  };
+}
+
+/**
+ * [수정] 사용자명이 유니크한지 찾기
+ * @param username
+ * @param user_no
+ */
+export async function findUsernameUnique(username: string, user_no: number) {
+  const user = await db.user.findUnique({
+    where: { user_no, username },
+  });
+
+  return {
+    success: Boolean(user),
+    data: user,
+  };
+}
+
+/**
+ * [수정] DB에서 입력한 이메일을 보유한 유저를 찾는다.
+ * @param email
+ * @returns
+ */
+export async function fineUserPassword(email: string) {
+  const user = await db.user.findUnique({
+    where: { email },
+    select: { user_no: true, password: true },
+  });
+
+  return user;
+}
+
+interface IProps {
+  user_no: number;
+  email: string;
+  username: string;
+  bio: string;
+  password: string;
+}
+export async function editUser({
+  user_no,
+  username,
+  email,
+  bio,
+  password,
+}: IProps) {}
+
 export default db;

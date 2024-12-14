@@ -21,6 +21,7 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IEditProps>({
     resolver: zodResolver(editFormSchema),
   });
@@ -28,14 +29,15 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
   async function onValid() {
     // 검증 이후 처리
     const onSubmit = handleSubmit(
-      async ({ username, email, bio, password }: IEditProps) => {
+      async ({ user_no, username, email, bio, password }: IEditProps) => {
         const formData = new FormData();
+        formData.append("userNo", user_no + "");
         formData.append("username", username);
         formData.append("email", email);
         formData.append("bio", bio);
         formData.append("password", password);
 
-        await edit(formData);
+        const result = await edit(formData);
       }
     );
 
@@ -59,6 +61,12 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
         </div>
         <div className="flex flex-col items-center my-10 ">
           <form action={onValid} className="*:mb-2 *:w-96 *:rounded-full">
+            <input
+              type="number"
+              name="user_no"
+              className="hidden"
+              defaultValue={user.user_no}
+            />
             <Input
               type="text"
               id="username"
