@@ -70,9 +70,9 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
 
         const result = await edit(formData);
         if (!result.success) {
-          result.username && setError("username", result.username); // 사용자명 오류
-          result.email && setError("email", result.email); // 이메일 오류
-          result.password && setError("password", result.password); // 비밀번호 오류
+          if (result.username) setError("username", result.username); // 사용자명 오류
+          if (result.email) setError("email", result.email); // 이메일 오류
+          if (result.password) setError("password", result.password); // 비밀번호 오류
         }
       }
     );
