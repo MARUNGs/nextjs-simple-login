@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from "react";
 import { IInputProps } from "../types/input";
-import { EmailIcon, PasswordIcon, UserIcon } from "../components/Icon";
+import { BioIcon, EmailIcon, PasswordIcon, UserIcon } from "../components/Icon";
 import clsx from "clsx";
 
 export default function Input({
@@ -16,6 +16,8 @@ export default function Input({
             <EmailIcon />
           ) : name === "username" ? (
             <UserIcon />
+          ) : name === "bio" ? (
+            <BioIcon />
           ) : (
             <PasswordIcon />
           )}

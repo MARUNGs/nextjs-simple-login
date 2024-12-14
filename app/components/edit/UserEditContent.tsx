@@ -62,45 +62,45 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
             <Input
               type="text"
               id="username"
-              // name="username"
               placeholder="사용자명을 입력하세요."
               {...register("username")}
               required
               defaultValue={user.username}
+              errors={[errors.username?.message]}
             />
             <Input
               type="email"
               id="email"
-              // name="email"
               placeholder="이메일을 입력하세요."
               required
               {...register("email")}
               defaultValue={user.email}
+              errors={[errors.email?.message]}
             />
             <Input
               type="text"
               id="bio"
-              // name="email"
               placeholder="소개를 입력하세요."
               required
               {...register("bio")}
               defaultValue={user.bio}
+              errors={[errors.bio?.message]}
             />
             <Input
               type="password"
               id="password"
-              // name="password"
               required
               {...register("password")}
               placeholder="현재 비밀번호를 입력하세요."
+              errors={[errors.password?.message]}
             />
             <Input
               type="password"
               id="passwordConfirm"
-              // name="passwordConfirm"
               required
               {...register("passwordConfirm")}
               placeholder="비밀번호 확인을 입력하세요."
+              errors={[errors.passwordConfirm?.message]}
             />
 
             <Button type="submit" text="Edit" />
