@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { formatToTimeAgo } from "../../lib/format";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
+// import Image from "next/image";
 import { findComments } from "./server";
 import { CommentListProps } from "../../types/CommentListType";
 
@@ -23,16 +23,16 @@ export default async function CommentList({ tweetNo }: CommentListProps) {
           <div className="flex flex-col *:ml-3 *:mb-5" key={i}>
             <div className="flex items-center ml-3 my-5">
               <div className="size-10 mr-3 relative aspect-square">
-                {comment.user.bio && comment.user.bio !== "" ? (
+                {/* {comment.user.bio && comment.user.bio !== "" ? (
                   <Image
                     className="object-cover"
                     src={comment.user.bio}
                     alt="user"
                     fill
                   />
-                ) : (
-                  <UserCircleIcon className="size-10" />
-                )}
+                ) : ( */}
+                <UserCircleIcon className="size-10" />
+                {/* )} */}
               </div>
 
               <span className="font-semibold">{comment.user.username}</span>
