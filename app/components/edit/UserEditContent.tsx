@@ -66,7 +66,7 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
               {...register("username")}
               required
               defaultValue={user.username}
-              errors={[errors.username?.message]}
+              errors={errors.username && [errors.username?.message]}
             />
             <Input
               type="email"
@@ -75,7 +75,7 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
               required
               {...register("email")}
               defaultValue={user.email}
-              errors={[errors.email?.message]}
+              errors={errors.email && [errors.email?.message]}
             />
             <Input
               type="text"
@@ -84,7 +84,7 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
               required
               {...register("bio")}
               defaultValue={user.bio}
-              errors={[errors.bio?.message]}
+              errors={errors.bio && [errors.bio?.message]}
             />
             <Input
               type="password"
@@ -92,7 +92,8 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
               required
               {...register("password")}
               placeholder="현재 비밀번호를 입력하세요."
-              errors={[errors.password?.message]}
+              autoComplete="true"
+              errors={errors.password && [errors.password?.message]}
             />
             <Input
               type="password"
@@ -100,7 +101,10 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
               required
               {...register("passwordConfirm")}
               placeholder="비밀번호 확인을 입력하세요."
-              errors={[errors.passwordConfirm?.message]}
+              autoComplete="true"
+              errors={
+                errors.passwordConfirm && [errors.passwordConfirm?.message]
+              }
             />
 
             <Button type="submit" text="Edit" />
