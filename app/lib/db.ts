@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { ILoginForm } from "../types/login";
-import { boolean } from "zod";
 
 const db = new PrismaClient(); // client 생성
 

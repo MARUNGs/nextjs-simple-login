@@ -30,12 +30,13 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
   });
 
   // 화면 진입하면 유저번호를 바로 세팅한다.
-  useEffect(() => setUserNo(user.user_no), []);
+  useEffect(() => setUserNo(user.user_no), [user.user_no]);
 
   //------------------------------------------------------------------------------------
   const [state, reducer] = useOptimistic(
     { username: user.username, email: user.email, bio: user.bio },
     (prevState, _) => {
+      console.log(_);
       return {
         ...prevState,
         password: null,
@@ -76,7 +77,7 @@ export default function UserEditContent({ user }: { user: IEditProps }) {
       }
     );
 
-    await onSubmit();
+    await onSubmit(); // onSubmit 호출
   }
 
   //------------------------------------------------------------------------------------

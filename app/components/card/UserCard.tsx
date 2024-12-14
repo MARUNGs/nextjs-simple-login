@@ -2,8 +2,13 @@ import clsx from "clsx";
 import { ProfileIcon } from "../Icon";
 import Link from "next/link";
 
+interface User {
+  username: string;
+  email: string;
+}
+
 interface UserCardProps {
-  user: any;
+  user: User;
 }
 
 export default function UserCard({ user }: UserCardProps) {

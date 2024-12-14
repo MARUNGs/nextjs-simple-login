@@ -1,6 +1,5 @@
 "use client";
 import clsx from "clsx";
-import Image from "next/image";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { formatToTimeAgo } from "@/app/lib/format";
 import { UserCommentListProps } from "@/app/types/CommentListType";

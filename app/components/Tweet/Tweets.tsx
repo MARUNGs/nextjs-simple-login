@@ -5,7 +5,6 @@ import {
   ArrowTurnDownLeftIcon,
   UserCircleIcon,
 } from "@heroicons/react/16/solid";
-import Image from "next/image";
 import { formatToTimeAgo } from "../../lib/format";
 
 export default function Tweets({ ...props }: ITweetType) {

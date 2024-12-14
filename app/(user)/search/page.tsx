@@ -14,7 +14,6 @@ import { searchTweets } from "./server";
 import { useState } from "react";
 import TweetsList from "@/app/components/Tweet/TweetsList";
 import SelectSearch from "@/app/components/SelectSearch";
-import Card from "@/app/components/Card";
 
 export default function Search() {
   const [search, setSearch] = useState([]);
